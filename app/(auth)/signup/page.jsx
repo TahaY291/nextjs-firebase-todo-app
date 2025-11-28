@@ -1,10 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import { auth } from "@/firebase/firebase.config";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { signupUser } from "@/firebase/firabaseAuth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/authStore";
+import Button from "@/components/Button";
+import Input from "@/components/Input";
 
 const Signup = () => {
     const [email, setEmail] = useState("");
@@ -20,10 +21,10 @@ const Signup = () => {
         if (password.length <= 5) return setMessage("Password must be 6+ characters");
 
         try {
-            const res = await createUserWithEmailAndPassword(auth, email, password);
+            const res = await signupUser(email, password);
             if (res.user) {
                 setUser(res.user);
-                router.push("/"); 
+                router.push("/");
             }
         } catch (error) {
             setMessage(error.message);
@@ -42,33 +43,25 @@ const Signup = () => {
                     <p className="text-red-500 text-sm text-center">{message}</p>
                 )}
                 <div className='flex flex-col w-full'>
-                    <label htmlFor="email" className='mb-1'>Email</label>
-                    <input
-                        type="email"
-                        id='email'
-                        className='w-full bg-white text-black px-3 py-2 rounded'
-                        placeholder='Enter email'
+                    <Input
+                        label="Email"
+                        placeholder="Enter your email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        type="email"
                     />
                 </div>
 
                 <div className="flex flex-col w-full">
-                    <label htmlFor="password" className="mb-1">Password</label>
-                    <input
-                        type="password"
-                        className="bg-white text-black px-3 py-2 rounded w-full"
-                        id="password"
-                        name="password"
+                    <Input
+                        label="Password"
                         placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        type="password"
                     />
                 </div>
-                <button type='submit'
-                    className='bg-blue-600 hover:bg-blue-700 px-3 cursor-pointer py-2 rounded font-semibold' onClick={handleSubmit}>
-                    sign up
-                </button>
+                <Button text={'signup'} type={'submit'} />
                 <Link href={'/login'} className="self-end text-blue-400 text-sm">
                     <span>login</span>
                 </Link>

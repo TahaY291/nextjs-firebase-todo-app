@@ -1,18 +1,15 @@
 import { create } from "zustand";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/firebase/firebase.config";
+import { listenToAuthChanges } from "@/firebase/firabaseAuth";
 
 export const useAuthStore = create((set) => ({
     user: null,
     loading: true,
 
     init: () => {
-        onAuthStateChanged(auth, (currentUser) => {
+        listenToAuthChanges((currentUser) => {
             set({ user: currentUser, loading: false });
         });
     },
     
     setUser: (user) => set({ user }),
-
-    logout: () => auth.signOut(),
 }));
