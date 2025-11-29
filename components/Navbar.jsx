@@ -4,6 +4,7 @@ import React from 'react'
 import { logoutUser } from '@/firebase/firabaseAuth'
 import { useAuthStore } from '@/store/authStore'
 import Button from './Button'
+import Link from 'next/link'
 
 export const Navbar = () => {
     const setUser = useAuthStore(state => state.setUser)
@@ -16,7 +17,9 @@ export const Navbar = () => {
 
   return (
     <div className='bg-[#181818] border-b border-gray-400 flex items-center justify-between px-16 py-3 '>
+      <Link href={'/'}>
         <h1 className='text-lg font-bold font-serif'>TaskNest</h1>
+      </Link>
         <Button onClick={handleLogOutUser} text={'logout'} type={'button'} />
     </div>
   )
