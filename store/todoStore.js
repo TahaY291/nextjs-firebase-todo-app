@@ -1,5 +1,11 @@
+import { getTodos } from "@/firebase/firebaseTodos";
 import { create } from "zustand";
 
-export const useStore = create((set) => ({
-    todos: [],
+export const useTodoStore = create((set) => ({
+  todos: [],
+
+  getTodo: async (userId) => {
+    const data = await getTodos(userId)
+    set({ todos: data })
+  }
 }));
