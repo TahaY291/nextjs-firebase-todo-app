@@ -11,8 +11,8 @@ import { useTodoStore } from '@/store/todoStore'
 
 export const Navbar = () => {
   const setUser = useAuthStore(state => state.setUser)
-  const user = useAuthStore(state => state.user)
-  const getTodo = useTodoStore(state => state.getTodo)
+  // const user = useAuthStore(state => state.user)
+  // const getTodo = useTodoStore(state => state.getTodo)
   const router = useRouter()
   const handleLogOutUser =async () => {
     await logoutUser()
@@ -20,9 +20,9 @@ export const Navbar = () => {
     router.push('/login')
   }
   
-  useEffect(() => {
-    if (user?.uid) getTodo(user.uid)
-  }, [user])
+  // useEffect(() => {
+  //   if (user?.uid) getTodo(user.uid)
+  // }, [user])
   return (
     <div className='bg-[#181818] border-b border-gray-400 flex items-center justify-between px-16 py-3 '>
       <Link href={'/'}>

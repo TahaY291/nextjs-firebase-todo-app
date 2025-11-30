@@ -4,6 +4,7 @@ import Input from './Input'
 import Button from './Button'
 import { addTodo } from '@/firebase/firebaseTodos'
 import { useAuthStore } from '@/store/authStore'
+import { useTodoStore } from '@/store/todoStore'
 
 
 const TodoForm = () => {

@@ -1,12 +1,21 @@
 'use client'
 import Title from '@/components/Title'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FileEdit } from 'lucide-react'
 import TodoItem from '@/components/TodoItem'
 import { useTodoStore } from '@/store/todoStore'
+import { useAuthStore } from '@/store/authStore'
 
 const Todos = () => {
   const todos = useTodoStore((state) => state.todos)
+  const getTodo = useTodoStore((state) => state.getTodo)
+  const user = useAuthStore((state) => state.user)
+
+  useEffect(() => {
+    if (user?.uid) {
+      getTodo(user.uid)   
+    }
+  }, [user]) 
 
   return (
     <>
@@ -18,16 +27,16 @@ const Todos = () => {
         <Title heading={"Let's Get Things Done"} />
       </div>
 
-      <div className='columns-4 mx-[10%] mb-10'>
-      {todos.map((todo) => (
-        <TodoItem 
-        key={todo.id}
-        id={todo.id}
-        title={todo.title}
-        description={todo.description}
-        completed={todo.isComplete}
-        />
-      ))}
+      <div className="flex flex-wrap gap-6 justify-center mx-[10%] mb-10">
+        {todos.map((todo) => (
+          <TodoItem 
+            key={todo.id}
+            id={todo.id}
+            title={todo.title}
+            description={todo.description}
+            completed={todo.isCompleted}
+          />
+        ))}
       </div>
     </>
   )
