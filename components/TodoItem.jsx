@@ -46,7 +46,7 @@
 
     return (
       <div className={`px-4 py-3 w-fit rounded-sm text-white break-inside-avoid transition-all mb-10 duration-200
-          ${completed ? 'bg-blue-700/40 border border-blue-600' : 'bg-[#323232]'}`}>
+          ${completed ? 'bg-blue-300/40 border border-blue-300' : 'bg-[#323232]'}`}>
 
         <textarea
           className={`p-2 w-full outline-none border border-gray-500 rounded-sm resize-none
@@ -78,7 +78,7 @@
 
           <div>
             <button
-              className={`border-2 rounded-full flex items-center justify-center font-semibold h-10 w-10
+              className={`border-2 rounded-full flex items-center cursor-pointer  justify-center font-semibold h-10 w-10
               ${completed ? 'border-yellow-500 text-yellow-500' : 'border-blue-300 text-blue-300'}`}
               onClick={toggleCompleted}
             >
@@ -89,7 +89,7 @@
           <div className='flex gap-2'>
 
             <button
-              className="border-2 border-green-600 rounded-full text-green-600  flex items-center justify-center h-10 w-10 font-semibold"
+              className="border-2 border-green-600 rounded-full cursor-pointer text-green-600  flex items-center justify-center h-10 w-10 font-semibold"
               onClick={handleEdit}
             >
               {editing ? <Image src={saveIcon} alt='save' /> : <Image src={editIcon} alt='Edit' />}
